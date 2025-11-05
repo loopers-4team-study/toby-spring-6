@@ -2,12 +2,33 @@
 
 ## 학습 내용
 
+### PaymentService 개발
+
+해외직구를 위한 원화 결제 준비 기능을 개발했습니다.
+
+**주요 기능:**
+
+- 주문번호, 외국 통화 종류, 외국 통화 기준 결제 금액을 받아서 Payment 생성
+- 외부 환율 API를 호출하여 실시간 환율 정보 조회
+- 적용 환율, 원화 환산 금액, 원화 환산 금액 유효시간을 포함한 Payment 객체 반환
+
+**구현 내용:**
+
+- `HttpURLConnection`을 사용한 외부 API 호출
+- JSON 응답 파싱 및 Java 객체 변환
+- 환율 정보를 활용한 원화 금액 계산
+
 ### InputStream → InputStreamReader → BufferedReader 이해
 
 #### 코드 예시
 
 ```java
+String url_str = "https://v6.exchangerate-api.com/v6/" + API_KEY + "/latest/" + currency;
+URL url = new URL(url_str);
+HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+String response = br.lines().collect(Collectors.joining());
+br.close();
 ```
 
 #### 각 단계별 역할
@@ -85,6 +106,36 @@ InputStream (바이트 단위로 읽기)
 InputStreamReader (문자로 변환)
     ↓ [버퍼링 + 편의 메서드]
 BufferedReader (효율적인 문자 읽기)
+```
+
+#### 부연 설명: Java I/O 기본 개념
+
+**바이트 단위가 기본인 이유**
+
+- 비트(bit): 0 또는 1의 최소 단위
+- 바이트(byte): 8비트 (1 byte = 8 bits)
+- Java는 바이트를 기본 단위로 사용 (바이트는 주소 지정 가능한 최소 단위이며, CPU/메모리 시스템이 바이트 단위로 동작)
+
+**InputStream, OutputStream이 I/O 작업의 기본**
+
+- Java I/O 작업의 기본은 `InputStream`(바이트 읽기)과 `OutputStream`(바이트 쓰기)
+- 이들은 추상 클래스로, 다양한 구현체(FileInputStream, ByteArrayInputStream, BufferedInputStream 등)가 존재
+- `Reader`/`Writer`는 문자 기반 스트림으로, 내부적으로 `InputStream`/`OutputStream` 기반
+
+**추상 클래스로 만든 이유**
+
+1. **추상화**: 구현 세부사항을 숨기고 공통 인터페이스 제공
+2. **개발자 편의성**: 구체적인 구현체를 몰라도 동일한 메서드(`read()`, `write()` 등) 사용 가능
+3. **다형성**: 파일이든 네트워크든 상관없이 같은 방식으로 사용
+
+```java
+// 파일이든 네트워크든 상관없이 같은 방식으로 사용
+InputStream input = new FileInputStream("file.txt");
+// 또는
+InputStream input = connection.getInputStream();
+
+// 모두 같은 방식으로 읽기 가능
+int data = input.read();
 ```
 
 ### JSON 파싱 관련 학습
