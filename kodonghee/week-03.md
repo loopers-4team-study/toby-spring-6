@@ -32,7 +32,11 @@
 - `@ComponentScan`: 직접 Bean을 등록하지 않고 스프링이 애노테이션을 참고해서 **자동으로** 빈을 찾아 등록하게 하고 싶을 때 사용
   <img width="519" height="165" alt="image" src="https://github.com/user-attachments/assets/24d0415e-a7aa-4733-8b35-c877cf5561a1" />
 
-#### 싱글톤 레지스트리
+<img width="684" height="498" alt="image" src="https://github.com/user-attachments/assets/e081afea-ff2b-45e5-a1ed-766f28a7d389" />
+
+
+#### 싱글톤 레지스트리 (Singleton Registry)
+- 
 
 
     
