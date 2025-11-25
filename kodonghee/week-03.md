@@ -26,5 +26,13 @@
   - BeanFactory가 처음 만들어질 때 이미 Bean 오브젝트들이 만들어지고 BeanFactory가 이것들을 내부에 가지고 있음 ➡️ 필요로 할 때 제공
   - ⭐️ BeanFactory 장점 ⭐️: 개발자가 객체 생성 시점을 신경 쓰지 않아도됨 🟰 의존 객체가 많아질수록 유지보수가 훨씬 쉬워짐
   - BeanFactory 🟰 스프링 IoC/DI 컨테이너
-    
+
+#### 구성정보를 가져오는 다른 방법
+- `@Component`: Bean 오브젝트로 만들 대상 클래스에 직접 붙여줌 ➡️ ObjectFactory에서 `@Bean` 메소드 만들지 않아도 됨
+- `@ComponentScan`: 직접 Bean을 등록하지 않고 스프링이 애노테이션을 참고해서 **자동으로** 빈을 찾아 등록하게 하고 싶을 때 사용
+  <img width="519" height="165" alt="image" src="https://github.com/user-attachments/assets/24d0415e-a7aa-4733-8b35-c877cf5561a1" />
+
+#### 싱글톤 레지스트리
+
+
     
