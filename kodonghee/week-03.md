@@ -75,8 +75,12 @@ PaymentService paymentService2 = objectFactory.PaymentService();
   - 환율 정보가 필요한 기능 증가/응답 시간/환율 변동 주기
   - 💡 환율 정보 캐시(Cache)의 도입 ➡️ 디자인 패턴을 잘 응용하면 WebApiExRateProvider 코드를 수정하지 않고도 캐시 도입 가능 (**데코레이터(Decorator)**)
 - 데코레이터(Decorator) 디자인 패턴
-  - 코드를 건드리지 않고 오브젝트에 부가적인 기능/책임을 동적으로 부여
+  - 기존 코드를 건드리지 않고 오브젝트에 부가적인 기능/책임을 동적으로 부여
 <img width="921" height="349" alt="image" src="https://github.com/user-attachments/assets/af288dbb-8ad9-42ba-8f3d-7e89a00c82b9" />
 
 #### DI와 디자인 패턴 (2)
+- 데코레이터(Decorator)
+  - 기능을 추가해줄 기존의 오브젝트와 동일한 인터페이스를 구현해야 함 ex) CachedExRateProvider
+  - 기존 코드에 영향을 주지 않고 ObjectFactory의 구성정보를 변경하는 것만으로도 캐시 기능 추가 완료
 
+#### 의존성 역전 원치 
