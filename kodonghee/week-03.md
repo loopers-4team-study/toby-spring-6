@@ -64,3 +64,19 @@ PaymentService paymentService2 = objectFactory.PaymentService();
 - objectFactory에서 생성자가 두 번 호출되었음에도 두 오브젝트는 동일함 ➡️ 스프링에서 `@Configuration` 클래스 안의 메소드 호출을 여러 번해도 특별한 다른 지시가 없다면 딱 하나의 오브젝트만 생성되도록 만듬
 
 #### DI와 디자인 패턴 (1)
+##### 의존성 주입 (Dependency Injection)
+##### 디자인 패턴
+- 패턴의 목적
+- 패턴의 Scope
+  - Class 패턴: 상속
+  - Object 패턴: 합성
+    - 스프링의 의존관계 주입(DI)을 사용
+- ❓환율 정보가 필요할 때 매번 Web API를 호출해야 할까?
+  - 환율 정보가 필요한 기능 증가/응답 시간/환율 변동 주기
+  - 💡 환율 정보 캐시(Cache)의 도입 ➡️ 디자인 패턴을 잘 응용하면 WebApiExRateProvider 코드를 수정하지 않고도 캐시 도입 가능 (**데코레이터(Decorator)**)
+- 데코레이터(Decorator) 디자인 패턴
+  - 코드를 건드리지 않고 오브젝트에 부가적인 기능/책임을 동적으로 부여
+<img width="921" height="349" alt="image" src="https://github.com/user-attachments/assets/af288dbb-8ad9-42ba-8f3d-7e89a00c82b9" />
+
+#### DI와 디자인 패턴 (2)
+
