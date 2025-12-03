@@ -47,5 +47,20 @@
   - static 메소드라 테스트하는 환경을 만들기 어려움
 - 🟣 싱글톤 패턴이 아닌 **스프링**을 사용하면 된다 !
 ##### 스프링의 싱글톤
-- 스프링은 많은 경우에 그 안에서 생성하고 구성하는 오브젝트들을 **싱글톤**으로 만듬
-    
+- 스프링은 많은 경우에 그 안에서 생성하고 구성하는 오브젝트들을 **싱글톤**으로 만듬 🟰 딱 한 개만 만듬
+- 스프링은 대부분 서버 애플리케이션을 만들기 때문에 사용자 요청마다 매번 새로운 오브젝트를 만들면 굉장히 메모리를 많이 먹고 비용 낭비가 심할 수 있음
+```java
+PaymentService paymentService = beanFactory.getBean(PaymentService.class);
+PaymentService paymentService2 = beanFactory.getBean(PaymentService.class);
+```
+- `paymentService`와 `paymentService2`는 동일한 오브젝트
+- 스프링 컨테이너가 PaymentService 타입의 오브젝트를 딱 한 개만 만들어서 가지고 있다는 의미
+```java
+ObjectFactory objectFactory = beanFactory.getBean(ObjectFactory.class);
+PaymentService paymentService1 = objectFactory.PaymentService();
+PaymentService paymentService2 = objectFactory.PaymentService();
+```
+- `paymentService`와 `paymentService2`는 동일한 오브젝트
+- objectFactory에서 생성자가 두 번 호출되었음에도 두 오브젝트는 동일함 ➡️ 스프링에서 `@Configuration` 클래스 안의 메소드 호출을 여러 번해도 특별한 다른 지시가 없다면 딱 하나의 오브젝트만 생성되도록 만듬
+
+#### DI와 디자인 패턴 (1)
