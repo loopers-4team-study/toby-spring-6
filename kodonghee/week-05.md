@@ -11,10 +11,29 @@
 - 리팩터링 하고자 하는 코드가 외부로 노출하고 있는 **기능을 변경하지 않은 채**로 구조만 개선하는 작업
 - 더 이해하기 쉬운 코드로, 변경하기 더 좋은 코드로 만들기 위해 진행
 - URL ➡️ URI : java 21부터 `java.net.URL` 클래스의 생성자들이 사용 중단(deprecated)되었으며, `java.net.URI` 클래스를 사용하도록 권장됨
-
-
-
-
+- `throws IOException` 제거
+  - IOException은 파일 입출력이나 네트워크 통신(API 호출)처럼 외부 장치와 데이터를 주고받을 때 주로 발생됨
+  - API를 호출하지 않고 내부적으로 데이터를 가공하거나 비즈니스 로직만 수행하는 코드라면 IOException 던질 필요가 없음
+- `getExRate`메소드 예외 처리
+  - 예외적인 상황이라는 것을 시스템 앞단으로 던져줘야 하는데 `catch` 해서 처리할 게 없는 경우 ➡️ **Unchecked Exception**
+  ``` java
+  String response;
+  try {
+    HttpURLConnection connection = (HttpURLConnection) uri.toURL().openConnection();
+    BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+    response = br.lines().collect(Collectors.joining());
+    br.close();
+  } catch (IOException e) {
+    throw new RuntimeException(e);         // Checked Exception을 Unchecked Exception으로 전환
+  }
+  ```
+##### Checked Exception vs Unchecked Exception
+|구분|Checked Exception|Unchecked Exception|
+|------|---|---|
+|처리 여부|반드시 처리해야 함 (try-catch 혹은 throws)|명시적인 처리를 강제하지 않음|
+|확인 시점|컴파일 시점에 확인|런타임(실행) 시점에 확인|
+|발생 원인|프로그램 외적 요인 (파일 없음, 네트워크 단절)|프로그래머의 실수 (0으로 나누기, null 참조)|
+|대표 예시|IOException, SQLException|NullPointerException, IndexOutOfBoundsException|
 
 #### 면접 문제
 ##### ❓ URI, URL, URN의 차이점은 무엇인가요?
