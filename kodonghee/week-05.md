@@ -43,6 +43,11 @@
 |발생 원인|프로그램 외적 요인 (파일 없음, 네트워크 단절)|프로그래머의 실수 (0으로 나누기, null 참조)|
 |대표 예시|IOException, SQLException|NullPointerException, IndexOutOfBoundsException|
 
+#### 변하는 코드 분리하기 - 메소드 추출
+##### WebApiExRateProvider의 구성
+1. URI를 준비하고 예외처리를 위한 작업을 하는 코드
+2. API를 실행하고, 서버로부터 받은 응답을 가져오는 코드
+
 #### 면접 문제
 ##### ❓ URI, URL, URN의 차이점은 무엇인가요?
 <img width="504" height="451" alt="image" src="https://github.com/user-attachments/assets/4128f502-4fee-461c-b06d-2e16eb6308c9" />
