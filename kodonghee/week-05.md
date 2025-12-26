@@ -19,12 +19,20 @@
   ``` java
   String response;
   try {
-    HttpURLConnection connection = (HttpURLConnection) uri.toURL().openConnection();
-    BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-    response = br.lines().collect(Collectors.joining());
-    br.close();
+      HttpURLConnection connection = (HttpURLConnection) uri.toURL().openConnection();
+      BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+      response = br.lines().collect(Collectors.joining());
+      br.close();
   } catch (IOException e) {
-    throw new RuntimeException(e);         // Checked Exception을 Unchecked Exception으로 전환
+      throw new RuntimeException(e);         // Checked Exception을 Unchecked Exception으로 전환
+  }
+  ```
+- `try-with-resources` 문 처리
+  - `try` 블록에 괄호()를 추가하여 파일을 열거나 자원을 할당하는 명령문을 명시하면, 해당 `try` 블록이 끝나자마자 자동으로 파일을 닫거나 할당된 자원을 해제해 줌
+  - BufferedReader ➡️ **Autocloseable** 인터페이스를 구현 받고 있음
+  ``` java
+  try(BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+      response = br.lines().collect(Collectors.joining());
   }
   ```
 ##### Checked Exception vs Unchecked Exception
