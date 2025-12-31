@@ -45,8 +45,25 @@
 
 #### 변하는 코드 분리하기 - 메소드 추출
 ##### WebApiExRateProvider의 구성
-1. URI를 준비하고 예외처리를 위한 작업을 하는 코드
-2. API를 실행하고, 서버로부터 받은 응답을 가져오는 코드
+1. URI를 준비하고 예외처리를 위한 작업을 하는 코드 ➡️ API로부터 환율 정보를 가져오는 코드의 기본 틀 **(잘 바뀌지 않음)**
+2. API를 실행하고, 서버로부터 받은 응답을 가져오는 코드 ➡️ API를 호출하는 기술과 방법이 변경될 수 있음
+   ``` java
+   HttpURLConnection connection = (HttpURLConnection) uri.toURL().openConnection();
+
+   try(BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
+       response = br.lines().collect(Collectors.joining());
+   }
+   ``` 
+3. JSON 문자열을 파싱하고 필요한 환율정보를 추출하는 코드 ➡️ API 응답의 JSON 구조에 따라 정보를 추출하는 방식이 변경
+   ``` java
+   ObjectMapper mapper = new ObjectMapper();
+   ExRateData data = mapper.readValue(response, ExRateData.class);
+   return data.rates().get("KRW");
+   ```
+🔴 2, 3 부분을 메소드로 추출
+
+#### 변하지 않는 코드 분리하기 - 메소드 추출
+##### 템플릿의 탄생
 
 #### 면접 문제
 ##### ❓ URI, URL, URN의 차이점은 무엇인가요?
