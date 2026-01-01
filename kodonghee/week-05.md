@@ -104,6 +104,31 @@
 - ApiTemplate이 어플리케이션 레벨에서 공유 가능한 오브젝트로 사용이 된다면 스프링 컨테이너 안의 싱글톤 빈으로 올려 사용하는 것을 고려해 볼 수 있음
 - Config 파일에 ApiTemplate을 Spring Bean으로 등록함
 
+#### 스프링이 제공하는 템플릿
+##### RestTemplate
+- HTTP API 요청을 처리하는 템플릿
+  - HTTP Client 라이브러리 확장: ClientHttpRequestFactory
+  - Message Body를 변환하는 전략: HttpMessageConverter
+- ClientHttpRequestFactory
+  - HTTP Client 기술을 사용해서 ClientHttpRequest를 생성하는 전략
+    - SimpleClientHttpRequest (HttpURLConnection) - 디폴트
+    - JdkClientHttpRequest (HttpClient)
+    - NettyClientRequest
+    - JettyClientRequest
+    - OkHttp3ClientRequest
+- doExecute()
+  - HTTP API 호출 workflow를 가지고 있는 템플릿 메소드로 두 개의 콜백을 받음
+    - RequestCallback
+    - ResponseExtractor
+    - execute(), getForObject(), postForEntity(), ..등등의 편리한 메소드 제공
+##### 스프링의 Template
+- JdbcTemplate
+- JmsTemplate
+- TransactionTemplate
+- HibernateTemplate
+##### MyBatis
+- SqlSessionTemplate
+
 #### 면접 문제
 ##### ❓ URI, URL, URN의 차이점은 무엇인가요?
 <img width="504" height="451" alt="image" src="https://github.com/user-attachments/assets/4128f502-4fee-461c-b06d-2e16eb6308c9" />
