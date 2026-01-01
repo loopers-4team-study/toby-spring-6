@@ -98,6 +98,12 @@
 - 유사한 여러 오브젝트에서 재사용 가능
 - 별도의 클래스로 분리
 
+#### 디폴트 콜백과 템플릿 빈 (재사용 가능한 Template Bean)
+##### Singleton Bean
+- [스프링의 싱글톤](https://github.com/loopers-4team-study/toby-spring-6/blob/main/kodonghee/week-03.md)
+- ApiTemplate이 어플리케이션 레벨에서 공유 가능한 오브젝트로 사용이 된다면 스프링 컨테이너 안의 싱글톤 빈으로 올려 사용하는 것을 고려해 볼 수 있음
+- Config 파일에 ApiTemplate을 Spring Bean으로 등록함
+
 #### 면접 문제
 ##### ❓ URI, URL, URN의 차이점은 무엇인가요?
 <img width="504" height="451" alt="image" src="https://github.com/user-attachments/assets/4128f502-4fee-461c-b06d-2e16eb6308c9" />
