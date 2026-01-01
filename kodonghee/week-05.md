@@ -90,7 +90,13 @@
 - 클라이언트가 콜백을 직접 만들어서 템플릿을 호출한다.
 <img width="786" height="346" alt="image" src="https://github.com/user-attachments/assets/1d23febd-1eae-42b5-b85b-fd017103903f" />
 
-
+#### ApiTemplate 분리
+##### ApiTemplate
+- 환율정보 API로부터 환율을 가져오는 기능을 제공하는 오브젝트
+- API 호출과 정보 추출의 기본 틀 제공
+- 두 가지 콜백을 이용
+- 유사한 여러 오브젝트에서 재사용 가능
+- 별도의 클래스로 분리
 
 #### 면접 문제
 ##### ❓ URI, URL, URN의 차이점은 무엇인가요?
