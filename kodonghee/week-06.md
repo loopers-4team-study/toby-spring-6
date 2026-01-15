@@ -53,3 +53,14 @@
 - DataSource, EntityManagerFactory ➡️ **인프라 스트럭쳐 빈**
   - JPA라는 기술이 애플리케이션 안에서 잘 동작할 수 있도록 기반을 만들어 줌
   - 스프링부트에서는 자동으로 만들어짐
+ 
+#### DataAccessException과 예외 추상화
+##### JDBC SQLException
+- JDBC를 기반으로 하는 모든 기술에서 발생하는 예외
+- JDBC, MyBatis, JPA, ...
+- DB의 에러코드에 의존하거나, 데이터 기술에 의존적인 예외처리 코드
+##### DataAccessException (스프링)
+- DB의 에러코드와 데이터 액세스 기술에 독립적인 예외 구조
+- 적절한 예외 번역(exception translation) 도구를 제공
+
+🟣 **체계적인 예외 구조를 만들고 적절한 예외 처리 방법을 사용하고 있는지 살펴보자 !**
