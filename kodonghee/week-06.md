@@ -44,3 +44,12 @@
 ##### 예외의 추상화와 전환
 - 사용 기술에 따라 같은 문제에 대해 다른 종류의 예외 발생
 - 적절한 예외 추상화와 예외 번역이 필요
+
+#### JPA를 이용한 Order 저장
+<img width="1015" height="509" alt="image" src="https://github.com/user-attachments/assets/21e6b03a-bdad-4908-84ae-2f4e5294a49e" />
+
+- DataSource, OrderRepository, EntityManagerFactory: 싱글톤, 스프링의 빈으로 등록됨
+- Order, EntityManager: 스프링의 빈으로 등록되지 않음
+- DataSource, EntityManagerFactory ➡️ **인프라 스트럭쳐 빈**
+  - JPA라는 기술이 애플리케이션 안에서 잘 동작할 수 있도록 기반을 만들어 줌
+  - 스프링부트에서는 자동으로 만들어짐
